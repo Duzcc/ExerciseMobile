@@ -67,10 +67,10 @@ class CoreWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // 3. Image Widget - Hiển thị ảnh logo NPA
+            // 3. Image.network() - Hiển thị ảnh logo NPA trực tiếp từ URL
             const SectionHeader(
-              title: '3. Image Widget (Logo NPA)',
-              subtitle: 'Hiển thị ảnh logo NPA từ thư mục assets',
+              title: '3. Image.network Widget (Logo NPA)',
+              subtitle: 'Tải và hiển thị ảnh logo NPA từ URL trực tiếp trên GitHub',
               icon: Icons.image,
             ),
             Center(
@@ -92,9 +92,22 @@ class CoreWidgetsScreen extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(
-                    'assets/images/npa_logo.jpg',
+                  child: Image.network(
+                    'https://raw.githubusercontent.com/Duzcc/ExerciseMobile/main/assets/images/npa_logo.jpg',
                     fit: BoxFit.contain,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const SizedBox(
+                        height: 180,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/images/npa_logo.jpg',
+                        fit: BoxFit.contain,
+                      );
+                    },
                   ),
                 ),
               ),

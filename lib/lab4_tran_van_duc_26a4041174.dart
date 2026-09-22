@@ -311,8 +311,8 @@ class Ex1CoreWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // 3. Image Widget (Logo NPA)
-            const Text('3. Image Widget (Logo NPA):', style: TextStyle(fontWeight: FontWeight.bold)),
+            // 3. Image.network (Logo NPA)
+            const Text('3. Image.network Widget (Logo NPA):', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Center(
               child: Container(
@@ -326,9 +326,15 @@ class Ex1CoreWidgets extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(
-                    'assets/images/npa_logo.jpg',
+                  child: Image.network(
+                    'https://raw.githubusercontent.com/Duzcc/ExerciseMobile/main/assets/images/npa_logo.jpg',
                     fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/images/npa_logo.jpg',
+                        fit: BoxFit.contain,
+                      );
+                    },
                   ),
                 ),
               ),
