@@ -311,25 +311,24 @@ class Ex1CoreWidgets extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // 3. Image.network
-            const Text(
-              '3. Image.network Widget:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            // 3. Image Widget (Logo NPA)
+            const Text('3. Image Widget (Logo NPA):', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                'https://picsum.photos/600/280',
-                height: 160,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  height: 160,
-                  color: Colors.grey.shade300,
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Không tải được ảnh URL (offline fallback)',
+            Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 320, maxHeight: 200),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4)),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    'assets/images/npa_logo.jpg',
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

@@ -67,60 +67,36 @@ class CoreWidgetsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // 3. Image.network() - hiển thị ảnh từ URL
+            // 3. Image Widget - Hiển thị ảnh logo NPA
             const SectionHeader(
-              title: '3. Image.network Widget',
-              subtitle: 'Tải và hiển thị ảnh từ URL với errorBuilder an toàn',
+              title: '3. Image Widget (Logo NPA)',
+              subtitle: 'Hiển thị ảnh logo NPA từ thư mục assets',
               icon: Icons.image,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                'https://picsum.photos/600/300',
-                height: 180,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Container(
-                    height: 180,
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
+            Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 320, maxHeight: 220),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(25),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
                     ),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: 180,
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.broken_image,
-                            size: 48,
-                            color: theme.colorScheme.error,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Không thể tải ảnh từ URL (Network unavailable)',
-                            style: TextStyle(color: theme.colorScheme.error),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                  ],
+                  border: Border.all(
+                    color: theme.colorScheme.outlineVariant.withAlpha(80),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    'assets/images/npa_logo.jpg',
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 20),
